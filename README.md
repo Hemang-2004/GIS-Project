@@ -1,10 +1,9 @@
-# 🌊 NEREAL Analyzer – Water Quality Intelligence Platform
+# 🌊 The NEREAS Analyzer – Water Quality Intelligence Platform
 
 ![Python](https://img.shields.io/badge/Python-3.9%2B-blue?logo=python)
 ![Gemini AI](https://img.shields.io/badge/AI-Gemini%202.5%20Pro-magenta?logo=google)
-![License](https://img.shields.io/badge/License-MIT-green)
 
-**NEREAL Analyzer** is an AI-powered analytics system designed for monitoring and predicting inland water quality. By fusing Satellite Data (**Google Earth Engine**) with **Ensemble Machine Learning**, and enhancing it with **Generative AI** (Google Gemini 2.5 Pro), this platform generates automatic, actionable insights for environmental preservation.
+**NEREAS Analyzer** is an AI-powered analytics system designed for monitoring and predicting inland water quality. By fusing Satellite Data (**Google Earth Engine**) with **Ensemble Machine Learning**, and enhancing it with **Generative AI** (Google Gemini 2.5 Pro), this platform generates automatic, actionable insights for environmental preservation.
 
 ---
 
@@ -17,7 +16,7 @@
 * **Full-Stack Dashboard:** A Next.js web application for visualizing correlations, trends, and anomalies.
 
 ---
-## 🚀 Tech Stack
+## Tech Stack
 
 ### Core & Data Science
 
@@ -30,20 +29,51 @@
 * **Visualization:** Matplotlib, Seaborn
 
 ---
-## 📂 Project Structure
+## Installation & Setup
 
-```text
-C:.
-├───data                  # Processed datasets and intermediate files
-├───GEE-Codes             # Google Earth Engine scripts (JS/Python)
-├───images                # Static assets and plot exports
-├───others                # Raw CSV inputs (Place GEE exports here)
-├───web-app               # Frontend Application
-│   ├───app
-│   │   ├───api           # Backend API endpoints (Analyze, Export, Plot)
-│   │   ├───ask-nereus    # AI Chatbot interface
-│   │   └───dashboard     # Main User Interface
-│   ├───components
-│   └───lib
-└───__pycache__
+* **Clone the repository**
+git clone https://github.com/Hemang-2004/GIS-Project.git
+cd GIS-project
 
+* **Install Dependencies**
+  pip install pandas numpy matplotlib seaborn scikit-learn python-dotenv google-generativeai xgboost
+
+* **Configuration (.env file)**
+  GEMINI_API_KEY=your_actual_google_gemini_api_key_here
+
+  ⚠️ **Important**: Never commit your .env file to GitHub.
+
+* **Dataset Placement**:Place all exported CSV files from Google Earth Engine inside the others/ directory.
+
+---
+
+## Launching the Web App
+cd web-app
+npm install
+npm run dev
+
+Open your browser at: http://localhost:3000
+
+---
+
+## Methodology 
+The NEREAS Analyzer follows 4 stage pipeline:
+
+***Data Acquisition**:
+   *Uses Google Earth Engine scripts located in GEE-Codes/
+   ***Extracted Parameters**: NDCI, Turbidity, Water Surface Area.
+
+***Preprocessing & Feature Engineering**
+   *Handled via backend.py
+   ***Time-series enhancements**: Cyclical Encoding (Day of Year), Normalized Year Feature.
+   *Interpolation and null value handling.
+
+***Predictive Modeling**
+   *Stacked Ensemble Regressor combining:
+      *Random Forest Regression 
+      *CART Regression
+   ***Final Prediction Formula:** $$Prediction = 0.65(RF) + 0.35(GB)$$
+   ***Accuracy**:~92-93%
+      
+  
+  
