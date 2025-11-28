@@ -36,13 +36,14 @@ git clone https://github.com/Hemang-2004/GIS-Project.git
 cd GIS-project
 ```
 * **Install Dependencies**
-* ```bash
+ ```bash
   pip install pandas numpy matplotlib seaborn scikit-learn python-dotenv google-generativeai xgboost
   ```
 
 * **Configuration (.env file)**
+```bash
   GEMINI_API_KEY=your_actual_google_gemini_api_key_here
-
+```
   ⚠️ **Important**: Never commit your .env file to GitHub.
 
 * **Dataset Placement**:Place all exported CSV files from Google Earth Engine inside the others/ directory.
@@ -62,11 +63,11 @@ Open your browser at: http://localhost:3000
 The NEREAS Analyzer follows 4 stage pipeline:
 
 ***Data Acquisition**:
-   *Uses Google Earth Engine scripts located in GEE-Codes/
+   *Uses Google Earth Engine scripts located in GEE-Codes.
    ***Extracted Parameters**: NDCI, Turbidity, Water Surface Area.
 
 ***Preprocessing & Feature Engineering**
-   *Handled via backend.py
+   *Handled via backend.py.
    ***Time-series enhancements**: Cyclical Encoding (Day of Year), Normalized Year Feature.
    *Interpolation and null value handling.
 
