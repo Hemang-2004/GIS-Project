@@ -182,9 +182,9 @@ def export_pdf():
 
     # You can customize naming here
     filename_map = {
-        "1": "analysis.pdf",
-        "2": "analysis_2.pdf",
-        "3": "analysis_3.pdf"
+        "1": "Analysis.pdf",
+        "2": "Analysis_2.pdf",
+        "3": "Analysis_3.pdf"
     }
 
     # default to analysis_1.pdf if ID not valid

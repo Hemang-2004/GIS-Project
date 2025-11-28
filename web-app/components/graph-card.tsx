@@ -12,34 +12,47 @@ interface GraphCardProps {
   onExpand: () => void
 }
 
+const getDummyGraphUrl = () => {
+  return "/water-quality-analysis-chart.jpg"
+}
+
 export default function GraphCard({ id, title, endpoint, dataset, isExpanded, onExpand }: GraphCardProps) {
-  const [imageUrl, setImageUrl] = useState<string>("")
+  const [imageUrl, setImageUrl] = useState<string>(getDummyGraphUrl())
   const [loading, setLoading] = useState(true)
   const [description, setDescription] = useState("")
+  const [isDummy, setIsDummy] = useState(true)
 
   useEffect(() => {
     setLoading(true)
-    const url = `http://127.0.0.1:8040/${endpoint}?id=${dataset || "1"}`
+    setImageUrl(getDummyGraphUrl())
+    setIsDummy(true)
+    setDescription(`Water quality ${title.toLowerCase()} visualization for dataset ${dataset || "1"}`)
+    setLoading(false)
 
-    fetch(url)
-      .then((res) => res.blob())
-      .then((blob) => {
-        const imageUrl = URL.createObjectURL(blob)
-        setImageUrl(imageUrl)
-        setDescription(`Water quality ${title.toLowerCase()} visualization for dataset ${dataset || "1"}`)
-        setLoading(false)
-      })
-      .catch((error) => {
-        console.error("[v0] Error fetching graph data:", error)
-        setImageUrl("/water-quality-chart.jpg")
-        setDescription("Failed to load visualization. Check if backend server is running on port 8040.")
-        setLoading(false)
-      })
-  }, [endpoint, dataset])
+    // After 1 second, try to fetch real data from backend
+    const timer = setTimeout(() => {
+      const url = `http://localhost:8040${endpoint}?id=${dataset || "1"}`
+
+      fetch(url)
+        .then((res) => res.blob())
+        .then((blob) => {
+          const imageUrl = URL.createObjectURL(blob)
+          setImageUrl(imageUrl)
+          setIsDummy(false)
+          setDescription(`Water quality ${title.toLowerCase()} visualization for dataset ${dataset || "1"}`)
+        })
+        .catch((error) => {
+          console.log("[v0] Using dummy data for:", title)
+          // Keep using dummy data if backend fails
+        })
+    }, 1000)
+
+    return () => clearTimeout(timer)
+  }, [endpoint, dataset, title])
 
   return (
     <div
-      className={`glass-effect card-hover rounded-2xl overflow-hidden transition-all ${
+      className={`glass-effect card-hover rounded-2xl overflow-hidden transition-all cursor-pointer ${
         isExpanded ? "ring-2 ring-cyan-500 shadow-xl" : ""
       }`}
       onClick={onExpand}
@@ -73,7 +86,7 @@ export default function GraphCard({ id, title, endpoint, dataset, isExpanded, on
               src={imageUrl || "/placeholder.svg"}
               alt={title}
               className="w-full h-full object-cover"
-              onError={() => setImageUrl("/water-quality-chart.jpg")}
+              onError={() => setImageUrl(getDummyGraphUrl())}
             />
           )}
         </div>
@@ -83,10 +96,10 @@ export default function GraphCard({ id, title, endpoint, dataset, isExpanded, on
 
         {/* Footer */}
         <div className="mt-4 flex items-center justify-between pt-4 border-t border-gray-100">
-          <p className="text-xs text-gray-400">Click to expand view</p>
+          <p className="text-xs text-gray-400">{isDummy ? "Sample visualization" : "Click to expand view"}</p>
           <div className="flex items-center gap-1 text-xs text-cyan-600">
-            <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
-            Real-time data
+            <span className={`w-2 h-2 rounded-full animate-pulse ${isDummy ? "bg-amber-500" : "bg-emerald-500"}`} />
+            {isDummy ? "Demo data" : "Real-time data"}
           </div>
         </div>
       </div>
