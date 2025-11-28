@@ -7,13 +7,12 @@
 
 ---
 
-## 🚀 Key Features
+## Key Features
 
 * **Remote Sensing Integration:** Automates extraction of raw satellite data (Sentinel-2/Landsat) using Google Earth Engine.
 * **Multi-Parameter Tracking:** Monitors **NDCI** (Algal Blooms), **Turbidity**, and **Water Surface Area** (Shrinkage).
 * **Generative AI Reporting:** Uses **Gemini 2.5 Pro** to produce human-readable risk assessments and trend analysis.
-* **High-Accuracy Forecasting:** Implements a stacked ensemble model (Random Forest + Gradient Boosting) achieving ~93% R².
-* **Full-Stack Dashboard:** A Next.js web application for visualizing correlations, trends, and anomalies.
+* **High-Accuracy Forecasting:** Implements a stacked ensemble model (Random Forest + CART regression) achieving ~92-93% R².
 
 ---
 ## Tech Stack
@@ -48,12 +47,12 @@ cd GIS-project
 ---
 
 ## Launching the Web App
+```bash
 cd web-app
 npm install
 npm run dev
-
+```
 Open your browser at: http://localhost:3000
-
 ---
 
 ## Methodology 
@@ -74,6 +73,9 @@ The NEREAS Analyzer follows 4 stage pipeline:
       *CART Regression
    ***Final Prediction Formula:** $$Prediction = 0.65(RF) + 0.35(GB)$$
    ***Accuracy**:~92-93%
-      
+
+---
+## Acknowledgement
+Built with care and code for Earth’s Water Bodies. If this project helps you, please star ⭐ it on GitHub!
   
   
