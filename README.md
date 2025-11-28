@@ -59,25 +59,35 @@ npm run dev
 Open your browser at: http://localhost:3000
 ---
 
-## Methodology 
-The NEREAS Analyzer follows 4 stage pipeline:
+## Methodology
 
-***Data Acquisition**:
-   *Uses Google Earth Engine scripts located in GEE-Codes.
-   ***Extracted Parameters**: NDCI, Turbidity, Water Surface Area.
+The **NEREAS Analyzer** follows a comprehensive **4-stage pipeline**:
 
-***Preprocessing & Feature Engineering**
-   *Handled via backend.py.
-   ***Time-series enhancements**: Cyclical Encoding (Day of Year), Normalized Year Feature.
-   *Interpolation and null value handling.
+### 1️⃣ Data Acquisition
+* **Source:** Uses Google Earth Engine (GEE) scripts located in the `GEE-Codes/` directory.
+* **Extracted Parameters:**
+    * **NDCI** (Normalized Difference Chlorophyll Index)
+    * **Turbidity**
+    * **Water Surface Area**
 
-***Predictive Modeling**
-   *Stacked Ensemble Regressor combining:
-      *Random Forest Regression 
-      *CART Regression
-   ***Final Prediction Formula:** $$Prediction = 0.65(RF) + 0.35(GB)$$
-   ***Accuracy**:~92-93%
+### 2️⃣ Preprocessing & Feature Engineering
+* **Logic:** Handled via `backend.py`.
+* **Time-Series Enhancements:**
+    * Cyclical Encoding (Sine/Cosine for Day of Year).
+    * Normalized Year Feature.
+* **Cleaning:** Interpolation and null value handling.
 
+### 3️⃣ Predictive Modeling
+* **Model:** Stacked Ensemble Regressor combining:
+    * **Random Forest Regression** (Base)
+    * **Gradient Boosting Regression** (Booster)
+* **Final Prediction Formula:**
+    $$Prediction = 0.65(RF) + 0.35(GB)$$
+* **Performance:** Achieves an approximate accuracy of **~92-93%**.
+
+### 4️⃣ Generative Insights Engine
+* **Integration:** Powered by **Google Gemini 2.5 Pro**.
+* **Function:** Ingests statistical summaries and model predictions to generate automated text reports, identifying risks (algal blooms) and anomalies in plain English.
 ---
 ## Acknowledgement
 Built with care and code for Earth’s Water Bodies. If this project helps you, please star ⭐ it on GitHub!
