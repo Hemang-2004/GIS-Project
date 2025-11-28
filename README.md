@@ -35,6 +35,7 @@ C:.
 │   └───lib
 └───__pycache__
 
+---
 ## 🚀 Tech Stack
 
 ### Core & Data Science
@@ -46,6 +47,8 @@ C:.
     * Gradient Boosting
     * AdaBoost
 * **Visualization:** Matplotlib, Seaborn
+
+---
 
 ## ⚙️ Installation & Setup
 
@@ -73,6 +76,8 @@ GEMINI_API_KEY=your_actual_google_gemini_api_key_here
 
 ⚠️ Important: Never commit your .env file to GitHub.
 
+---
+
 ## 📊 Usage
 
 ### 🔹 Running the Backend Analysis (Terminal)
@@ -96,6 +101,8 @@ print(report)
 metrics = backend.train_and_evaluate_model("1")
 print(metrics)
 
+---
+
 ### 🔹 Launching the Web App
 Navigate to the web frontend folder to start the dashboard:
 
@@ -105,6 +112,8 @@ npm install
 npm run dev
 
 Open your browser at: http://localhost:3000
+
+---
 
 ## 📈 Methodology
 
@@ -134,3 +143,5 @@ $$Prediction = 0.65(RF) + 0.35(GB)$$
     * Comprehensive Risk Analysis
     * Water Quality Trends
     * Algal Bloom Probabilities
+
+---
