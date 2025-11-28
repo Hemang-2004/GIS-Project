@@ -23,8 +23,7 @@
 * **Data Processing:** Pandas, NumPy
 * **Machine Learning:** Scikit-Learn
     * Random Forest (Grid Search Tuned)
-    * Gradient Boosting
-    * AdaBoost
+    * CART Regression
 * **Visualization:** Matplotlib, Seaborn
 
 ---
