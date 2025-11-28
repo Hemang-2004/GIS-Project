@@ -1,10 +1,15 @@
 "use client"
 
+import type React from "react"
+
 import { useState } from "react"
 import DashboardLayout from "@/components/dashboard-layout"
 import GraphCard from "@/components/graph-card"
 import UserActivityChart from "@/components/user-activity-chart"
 import StatsOverview from "@/components/stats-overview"
+import AnalysisLoader from "@/components/analysis-loader"
+import ViewAnalysisOverlay from "@/components/view-analysis-overlay"
+import { useAnalysis } from "@/lib/analysis-context"
 
 export default function DashboardPage() {
   const [selectedDataset, setSelectedDataset] = useState("1")
@@ -12,6 +17,34 @@ export default function DashboardPage() {
   const [contextInput, setContextInput] = useState<string>("")
   const [showContextBox, setShowContextBox] = useState<string | null>(null)
   const [submitted, setSubmitted] = useState(false)
+  const [showLoader, setShowLoader] = useState(false)
+  const [uploadedFile, setUploadedFile] = useState<string | null>(null)
+  const [showViewAnalysisOverlay, setShowViewAnalysisOverlay] = useState(false)
+  const [analysisCompleteDatasetId, setAnalysisCompleteDatasetId] = useState<string | null>(null)
+  const [isViewAnalysisComplete, setIsViewAnalysisComplete] = useState(false)
+
+  const { startAnalysis, completeAnalysis } = useAnalysis()
+
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (file) {
+      setUploadedFile(file.name)
+      startAnalysis(file.name, selectedDataset)
+      setShowLoader(true)
+    }
+  }
+
+  const handleLoaderComplete = () => {
+    setShowLoader(false)
+    completeAnalysis(selectedDataset)
+    setAnalysisCompleteDatasetId(selectedDataset)
+    setShowViewAnalysisOverlay(true)
+  }
+
+  const handleOverlayComplete = () => {
+    setShowViewAnalysisOverlay(false)
+    setIsViewAnalysisComplete(true)
+  }
 
   const graphs = [
     { id: "correlation", title: "Correlation Matrix", endpoint: "/api/plot/correlation" },
@@ -37,12 +70,24 @@ export default function DashboardPage() {
 
   return (
     <DashboardLayout selectedDataset={selectedDataset} onDatasetChange={setSelectedDataset}>
+      <AnalysisLoader isVisible={showLoader} onComplete={handleLoaderComplete} />
+
+      <ViewAnalysisOverlay isVisible={showViewAnalysisOverlay} onComplete={handleOverlayComplete} />
+
       {/* Header Section */}
       <div className="mb-12">
         <h2 className="text-3xl font-bold mb-2" style={{ color: "#1A1A1A" }}>
           All About your Analysis
         </h2>
         <p className="text-gray-600 mb-8">Dataset: Water Body {selectedDataset}</p>
+
+        {uploadedFile && (
+          <div className="mb-6 p-4 bg-emerald-50 border border-emerald-200 rounded-lg">
+            <p className="text-sm text-emerald-800">
+              ✓ File <span className="font-semibold">{uploadedFile}</span> placed in analysis
+            </p>
+          </div>
+        )}
 
         {/* Action Buttons */}
         <div className="flex gap-4 flex-wrap">
@@ -56,12 +101,13 @@ export default function DashboardPage() {
             🌍 GEE-Analyser
           </button>
 
-          <button
-            className="px-6 py-3 border-2 border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition-all"
+          <label
+            className="px-6 py-3 border-2 border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition-all cursor-pointer"
             style={{ fontFamily: '"Google Sans Flex", sans-serif', fontWeight: 500 }}
           >
-            📤 Please drop your database
-          </button>
+            📤 Drop your database
+            <input type="file" className="hidden" accept=".csv,.json,.xlsx" onChange={handleFileUpload} />
+          </label>
         </div>
 
         {/* File Upload with Animation */}
@@ -82,7 +128,7 @@ export default function DashboardPage() {
             </svg>
             <span className="text-lg font-semibold text-blue-600">Drop your database file here</span>
             <span className="text-sm text-gray-600 mt-2">CSV, JSON, or Excel formats supported</span>
-            <input type="file" className="hidden" accept=".csv,.json,.xlsx" />
+            <input type="file" className="hidden" accept=".csv,.json,.xlsx" onChange={handleFileUpload} />
           </label>
         </div>
       </div>
@@ -114,6 +160,8 @@ export default function DashboardPage() {
                 dataset={selectedDataset}
                 isExpanded={expandedCard === graph.id}
                 onExpand={() => setExpandedCard(expandedCard === graph.id ? null : graph.id)}
+                shouldReloadAfterAnalysis={analysisCompleteDatasetId === selectedDataset}
+                isViewAnalysisComplete={isViewAnalysisComplete}
               />
 
               {/* Context Input */}

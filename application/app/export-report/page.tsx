@@ -12,35 +12,46 @@ export default function ExportReportPage() {
   const [filePath, setFilePath] = useState("")
   const [showPathInput, setShowPathInput] = useState(false)
 
-  const handleGeneratePDF = async () => {
-    setLoading(true)
-    try {
-      const response = await fetch("http://localhost:8040/api/export/pdf", {
-  method: "GET"
-})
-      if (response.ok) {
-        const blob = await response.blob()
-        const url = URL.createObjectURL(blob)
-        const a = document.createElement("a")
-        a.href = url
-        a.download = filePath || "NEREUS_Report.pdf"
-        document.body.appendChild(a)
-        a.click()
-        a.remove()
-        URL.revokeObjectURL(url)
-
-        setReportGenerated(true)
-        setFilePath("")
-        setShowPathInput(false)
-        setTimeout(() => setReportGenerated(false), 5000)
+const handleGeneratePDF = async () => {
+  setLoading(true)
+  try {
+    const response = await fetch(
+      `http://localhost:8040/api/export/pdf?id=${selectedDataset}`,
+      {
+        method: "GET",
       }
-    } catch (error) {
-      console.error("[v0] Error generating report:", error)
-      alert("Could not export PDF. Make sure backend server is running on localhost:8040")
-    } finally {
-      setLoading(false)
+    )
+
+    if (!response.ok) {
+      throw new Error("Failed to download PDF")
     }
+
+    const blob = await response.blob()
+    const url = URL.createObjectURL(blob)
+
+    const a = document.createElement("a")
+    a.href = url
+    a.download = filePath || "NERUES_Report_1.pdf"   // fallback filename
+    document.body.appendChild(a)
+    a.click()
+    a.remove()
+
+    URL.revokeObjectURL(url)
+
+    setReportGenerated(true)
+    setFilePath("")
+    setShowPathInput(false)
+    setTimeout(() => setReportGenerated(false), 5000)
+
+  } catch (error) {
+    console.error("[v0] PDF Error:", error)
+    alert("Could not export PDF. Check if backend is running on port 8040.")
+  } finally {
+    setLoading(false)
   }
+}
+
+
 
   return (
     <DashboardLayout selectedDataset={selectedDataset} onDatasetChange={setSelectedDataset}>

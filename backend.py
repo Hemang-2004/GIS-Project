@@ -45,7 +45,7 @@ DATASET_LABEL = "Water Body"
 # Cache so we don't reload CSV every time
 _DATASET_CACHE: dict[str, pd.DataFrame] = {}
 
-
+SELECTED_DATASET = 1
 # -------------------------------------------------------------------
 # UTILITIES
 # -------------------------------------------------------------------
@@ -452,13 +452,14 @@ def train_and_evaluate_model(dataset_id: str) -> dict:
 # ------------------------------------------------------------
 # MANUAL INPUT AT START (LIKE ORIGINAL NOTEBOOK)
 # ------------------------------------------------------------
+if __name__ == "__main__":
+    print("\nType to continue:")
+    _choice = input().strip()
 
-print("\nType to continue:")
-_choice = input().strip()
+    if _choice not in ["1", "2", "3"]:
+        print("Invalid input — defaulting to dataset 1.")
+        _choice = "1"
 
-if _choice not in ["1", "2", "3"]:
-    print("Invalid input — defaulting to dataset 1.")
-    _choice = "1"
+    SELECTED_DATASET = _choice
 
-SELECTED_DATASET = _choice
-# print(f"\nSelected dataset for server: {SELECTED_DATASET}")
+    # print(f"Selected dataset for server: {SELECTED_DATASET}")

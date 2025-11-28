@@ -19,10 +19,12 @@ const steps = [
 
 export default function AnalysisLoader({ isVisible, onComplete }: AnalysisLoaderProps) {
   const [currentStep, setCurrentStep] = useState(0)
+  const [showContinueButton, setShowContinueButton] = useState(false)
 
   useEffect(() => {
     if (!isVisible) {
       setCurrentStep(0)
+      setShowContinueButton(false)
       return
     }
 
@@ -30,7 +32,7 @@ export default function AnalysisLoader({ isVisible, onComplete }: AnalysisLoader
       setCurrentStep((prev) => {
         if (prev >= steps.length - 1) {
           clearInterval(interval)
-          setTimeout(onComplete, 500)
+          setTimeout(() => setShowContinueButton(true), 500)
           return prev
         }
         return prev + 1
@@ -39,6 +41,11 @@ export default function AnalysisLoader({ isVisible, onComplete }: AnalysisLoader
 
     return () => clearInterval(interval)
   }, [isVisible, onComplete])
+
+  const handleContinue = () => {
+    setShowContinueButton(false)
+    setTimeout(onComplete, 300)
+  }
 
   if (!isVisible) return null
 
@@ -85,6 +92,15 @@ export default function AnalysisLoader({ isVisible, onComplete }: AnalysisLoader
             style={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
           />
         </div>
+
+        {showContinueButton && (
+          <button
+            onClick={handleContinue}
+            className="mt-6 w-full py-3 bg-gradient-to-r from-cyan-600 to-teal-600 text-white rounded-xl font-semibold hover:shadow-lg transition-all animate-pulse"
+          >
+            Continue to View Analysis
+          </button>
+        )}
       </div>
     </div>
   )

@@ -73,7 +73,7 @@ export default function AskNereusPage() {
         id: (Date.now() + 1).toString(),
         role: "assistant",
         content:
-          "Unable to connect to analysis service on localhost:8040. Make sure the backend server is running. Using database ID: 1 for fallback analysis.",
+          "Unable to connect to analysis service on localhost:8040. Make sure the backend server is running.",
         timestamp: new Date(),
       }
       setMessages((prev) => [...prev, errorMessage])

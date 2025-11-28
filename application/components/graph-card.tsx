@@ -10,28 +10,40 @@ interface GraphCardProps {
   dataset: string
   isExpanded: boolean
   onExpand: () => void
+  shouldReloadAfterAnalysis?: boolean
+  isViewAnalysisComplete?: boolean
 }
 
 const getDummyGraphUrl = () => {
   return "/water-quality-analysis-chart.jpg"
 }
 
-export default function GraphCard({ id, title, endpoint, dataset, isExpanded, onExpand }: GraphCardProps) {
+export default function GraphCard({
+  id,
+  title,
+  endpoint,
+  dataset,
+  isExpanded,
+  onExpand,
+  shouldReloadAfterAnalysis,
+  isViewAnalysisComplete = false,
+}: GraphCardProps) {
   const [imageUrl, setImageUrl] = useState<string>(getDummyGraphUrl())
   const [loading, setLoading] = useState(true)
   const [description, setDescription] = useState("")
   const [isDummy, setIsDummy] = useState(true)
 
   useEffect(() => {
-    setLoading(true)
+    setLoading(false)
     setImageUrl(getDummyGraphUrl())
     setIsDummy(true)
     setDescription(`Water quality ${title.toLowerCase()} visualization for dataset ${dataset || "1"}`)
-    setLoading(false)
+  }, [title, dataset])
 
-    // After 1 second, try to fetch real data from backend
-    const timer = setTimeout(() => {
-      const url = `http://localhost:8040${endpoint}?id=${dataset || "1"}`
+  useEffect(() => {
+    if (isViewAnalysisComplete && isDummy) {
+      setLoading(true)
+      const url = `http://localhost:8040${endpoint}`
 
       fetch(url)
         .then((res) => res.blob())
@@ -39,16 +51,32 @@ export default function GraphCard({ id, title, endpoint, dataset, isExpanded, on
           const imageUrl = URL.createObjectURL(blob)
           setImageUrl(imageUrl)
           setIsDummy(false)
-          setDescription(`Water quality ${title.toLowerCase()} visualization for dataset ${dataset || "1"}`)
+          setLoading(false)
         })
-        .catch((error) => {
+        .catch(() => {
           console.log("[v0] Using dummy data for:", title)
-          // Keep using dummy data if backend fails
+          setLoading(false)
         })
-    }, 1000)
+    }
+  }, [isViewAnalysisComplete, endpoint, dataset, title, isDummy])
 
-    return () => clearTimeout(timer)
-  }, [endpoint, dataset, title])
+  useEffect(() => {
+    if (shouldReloadAfterAnalysis && !isDummy) {
+      setLoading(true)
+      const url = `http://localhost:8040${endpoint}?id=${dataset || "1"}`
+
+      fetch(url)
+        .then((res) => res.blob())
+        .then((blob) => {
+          const imageUrl = URL.createObjectURL(blob)
+          setImageUrl(imageUrl)
+          setLoading(false)
+        })
+        .catch(() => {
+          setLoading(false)
+        })
+    }
+  }, [shouldReloadAfterAnalysis, endpoint, dataset])
 
   return (
     <div
