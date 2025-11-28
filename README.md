@@ -31,11 +31,14 @@
 ## Installation & Setup
 
 * **Clone the repository**
+```bash
 git clone https://github.com/Hemang-2004/GIS-Project.git
 cd GIS-project
-
+```
 * **Install Dependencies**
+* ```bash
   pip install pandas numpy matplotlib seaborn scikit-learn python-dotenv google-generativeai xgboost
+  ```
 
 * **Configuration (.env file)**
   GEMINI_API_KEY=your_actual_google_gemini_api_key_here
