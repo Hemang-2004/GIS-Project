@@ -18,23 +18,6 @@
 
 ---
 
-## 📂 Project Structure
-
-```text
-C:.
-├───data                  # Processed datasets and intermediate files
-├───GEE-Codes             # Google Earth Engine scripts (JS/Python)
-├───images                # Static assets and plot exports
-├───others                # Raw CSV inputs (Place GEE exports here)
-├───web-app               # Frontend Application
-│   ├───app
-│   │   ├───api           # Backend API endpoints (Analyze, Export, Plot)
-│   │   ├───ask-nereus    # AI Chatbot interface
-│   │   └───dashboard     # Main User Interface
-│   ├───components
-│   └───lib
-└───__pycache__
-
 ---
 ## 🚀 Tech Stack
 
@@ -143,5 +126,21 @@ $$Prediction = 0.65(RF) + 0.35(GB)$$
     * Comprehensive Risk Analysis
     * Water Quality Trends
     * Algal Bloom Probabilities
-
 ---
+## 📂 Project Structure
+
+```text
+C:.
+├───data                  # Processed datasets and intermediate files
+├───GEE-Codes             # Google Earth Engine scripts (JS/Python)
+├───images                # Static assets and plot exports
+├───others                # Raw CSV inputs (Place GEE exports here)
+├───web-app               # Frontend Application
+│   ├───app
+│   │   ├───api           # Backend API endpoints (Analyze, Export, Plot)
+│   │   ├───ask-nereus    # AI Chatbot interface
+│   │   └───dashboard     # Main User Interface
+│   ├───components
+│   └───lib
+└───__pycache__
+
