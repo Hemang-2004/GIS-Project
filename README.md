@@ -1,4 +1,4 @@
-# 🌊 The NEREAS Analyzer – Water Quality Intelligence Platform
+# 🌊 The NEREUS Analyzer – Water Quality Intelligence Platform
 
 ![Python](https://img.shields.io/badge/Python-3.9%2B-blue?logo=python)
 ![Gemini AI](https://img.shields.io/badge/AI-Gemini%202.5%20Pro-magenta?logo=google)
