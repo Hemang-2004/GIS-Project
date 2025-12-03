@@ -453,7 +453,7 @@ def train_and_evaluate_model(dataset_id: str) -> dict:
 # MANUAL INPUT AT START (LIKE ORIGINAL NOTEBOOK)
 # ------------------------------------------------------------
 if __name__ == "__main__":
-    print("\nType to continue:")
+    print("\n Port for CI/CD ")
     _choice = input().strip()
 
     if _choice not in ["1", "2", "3"]:

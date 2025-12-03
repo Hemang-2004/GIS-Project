@@ -4,10 +4,12 @@ import backend
 import analysis
 import os
 
+
+
 # ------------------------------------------------------------
 # ASK AT START: "Type to continue"
 # ------------------------------------------------------------
-print("\nType to continue:")
+print("\nPort for CI/CD:")
 _choice = input().strip()
 
 if _choice not in ["1", "2", "3"]:
@@ -17,7 +19,7 @@ if _choice not in ["1", "2", "3"]:
 backend.SELECTED_DATASET = _choice
 CURRENT_DATASET = _choice
 
-print(f"\n✔ Dataset selected: {CURRENT_DATASET}")
+print(f"\n✔ Port selected: {CURRENT_DATASET}")
 print("✔ Starting server...\n")
 
 # ------------------------------------------------------------

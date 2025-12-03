@@ -4,3 +4,7 @@ scikit-learn
 seaborn
 matplotlib
 ipykernel
+flask
+flask_cors
+dotenv
+google.generativeai
