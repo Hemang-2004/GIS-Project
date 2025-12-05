@@ -84,7 +84,7 @@ var maskedComposite = composite.updateMask(waterMask);
 var vizSettings = {
   'Chlorophyll-a (Algae Bloom)': {
     band: 'Chl_a',
-    min: 0, max: 30,
+    min: 0, max: 25,
     mapPalette: ['000044', '0000FF', '00FFFF', '00FF00','FFFF00'],
     legendPalette: ['000044','0000FF','00FFFF','00FF00'],
     label: 'Chl-a (mg/m³)',
