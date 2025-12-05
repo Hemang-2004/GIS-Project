@@ -82,14 +82,14 @@ export default function ReportPreview({ dataset }: ReportPreviewProps) {
         <div className="prose prose-gray max-w-none">
           <p className="text-gray-700 leading-relaxed mb-4">
             This report presents <strong>NEREUS</strong>, an integrated AI–remote sensing water quality analytics
-            system. Using NDCI, Turbidity (NTU), and NDWI-derived Shrinkage metrics collected longitudinally from{" "}
+            system. Using Chla, Turbidity (NTU), and NDWI-derived Shrinkage metrics collected longitudinally from{" "}
             <strong>2020–2024</strong>, the system performs ML modeling, trend decomposition, and predictive
             environmental assessment.
           </p>
           <p className="text-gray-700 leading-relaxed">
             A generative AI engine (Gemini 2.5) interprets dataset patterns and provides advanced ecological insights.
             The dataset contains <strong>1,825 daily observations</strong> with engineered temporal features including
-            Year, Month, and DayOfYear. Machine learning models achieve <strong>92-93% accuracy</strong> in predicting
+            Year, Month, and DayOfYear. Machine learning models achieve <strong>90-91% accuracy</strong> in predicting
             water quality indices.
           </p>
         </div>
@@ -116,7 +116,7 @@ export default function ReportPreview({ dataset }: ReportPreviewProps) {
             icon: <BarChart3 className="w-5 h-5" />,
             color: "from-emerald-500 to-green-500",
           },
-          { label: "Accuracy", value: "93%", icon: <Target className="w-5 h-5" />, color: "from-cyan-500 to-teal-500" },
+          { label: "Accuracy", value: "90%", icon: <Target className="w-5 h-5" />, color: "from-cyan-500 to-teal-500" },
         ].map((metric, i) => (
           <div key={i} className="glass-effect p-5 rounded-xl card-hover">
             <div
@@ -144,9 +144,9 @@ export default function ReportPreview({ dataset }: ReportPreviewProps) {
           {[
             {
               icon: <BarChart3 className="w-6 h-6" />,
-              title: "NDCI Trend Analysis",
+              title: "Chla Trend Analysis",
               description:
-                "Long-term upward drift indicating progressive chlorophyll intensification and potential eutrophication risk. NDCI shows moderate positive correlation with Year (0.53).",
+                "Long-term upward drift indicating progressive chlorophyll intensification and potential eutrophication risk. Chla shows moderate positive correlation with Year.",
               color: "from-blue-500 to-cyan-500",
             },
             {
@@ -167,7 +167,7 @@ export default function ReportPreview({ dataset }: ReportPreviewProps) {
               icon: <Brain className="w-6 h-6" />,
               title: "ML Model Performance",
               description:
-                "Random Forest achieves 92-93% accuracy, making it the best-performing model for NDCI prediction compared to Gradient Boosting, AdaBoost, and others.",
+                "Random Forest achieves 90-91% accuracy, making it the best-performing model for Chla prediction compared to Gradient Boosting, AdaBoost, and others.",
               color: "from-cyan-500 to-teal-500",
             },
           ].map((finding, i) => (
@@ -204,7 +204,7 @@ export default function ReportPreview({ dataset }: ReportPreviewProps) {
             {
               title: "Data Collection",
               content:
-                "Daily observations from 2020-2024 using satellite-derived indices: NDCI (Chlorophyll-a proxy), Turbidity (NTU - suspended matter), and NDWI (water body area).",
+                "Daily observations from 2020-2024 using satellite-derived indices: Chla (Chlorophyll-a proxy), Turbidity (NTU - suspended matter), and NDWI (water body area).",
             },
             {
               title: "Feature Engineering",
@@ -240,10 +240,10 @@ export default function ReportPreview({ dataset }: ReportPreviewProps) {
         </div>
         <ul className="space-y-3">
           {[
-            "Monitor NDCI levels closely for early eutrophication warning signs",
+            "Monitor Chla levels closely for early eutrophication warning signs",
             "Implement continuous turbidity monitoring during monsoon seasons",
             "Develop water conservation strategies based on seasonal shrinkage patterns",
-            "Use Random Forest model for short-term NDCI predictions with 93% confidence",
+            "Use Random Forest model for short-term Chla predictions with 90% confidence",
             "Integrate real-time satellite data feeds for continuous monitoring",
           ].map((rec, i) => (
             <li key={i} className="flex items-start gap-3 p-3 rounded-lg bg-emerald-50/50">
@@ -264,10 +264,10 @@ export default function ReportPreview({ dataset }: ReportPreviewProps) {
             { label: "Dataset Size", value: "1,825 records" },
             { label: "Analysis Period", value: "2020-2024 (5 years)" },
             { label: "Primary Metrics", value: "3 satellite indices" },
-            { label: "Model Accuracy", value: "92-93%" },
+            { label: "Model Accuracy", value: "90-91%" },
             { label: "ML Models Tested", value: "6 algorithms" },
             { label: "Best Model", value: "Random Forest" },
-            { label: "AI Engine", value: "Gemini 2.5" },
+            { label: "AI Engine", value: "Gemini 2.5-pro" },
             { label: "Update Frequency", value: "Daily" },
           ].map((spec, i) => (
             <div key={i} className="text-center p-4 rounded-xl bg-gradient-to-br from-white/50 to-cyan-50/50">

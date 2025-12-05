@@ -65,10 +65,6 @@ def _build_context_text(dataset_id: str) -> str:
         "\n=== CORRELATION MATRIX (rounded) ===",
         str(corr_rounded),
 
-        "\n=== MODEL PERFORMANCE (ML Predictions) ===",
-        f"Display Model R²: {metrics['display_r2']}  (~{metrics['display_r2_percent']:.2f}%)",
-        f"Display Model RMSE: {metrics['display_rmse']}",
-
         "\n=== FORECASTING REQUIREMENT ===",
         "Please analyze patterns and PREDICT future values for:",
         "- NDCI_Value",
@@ -80,9 +76,11 @@ def _build_context_text(dataset_id: str) -> str:
 
     return "\n".join(context_lines)
 
-
 # ==============================
 #  MAIN AI ANALYSIS
+# ==============================
+# ==============================
+#  MAIN AI ANALYSIS — FINAL FORCED TREND MODE
 # ==============================
 def generate_textual_analysis(dataset_id: str, user_prompt: str = "", api_key: Optional[str] = None) -> str:
 
@@ -93,31 +91,42 @@ def generate_textual_analysis(dataset_id: str, user_prompt: str = "", api_key: O
 
     context = _build_context_text(dataset_id)
 
+    # 🔥 HARD-FORCED SCIENTIFIC QUESTIONS (NO ML METRICS ALLOWED)
+    forced_questions = """
+QUESTION 1:
+What do the long-term trends in turbidity, chlorophyll (algal concentration), and water shrinkage reveal about how these factors are physically linked? Explain how changes in turbidity influence algal behavior, how algae respond over time, and how this combined interaction drives the observed shrinkage patterns in the water body.
+
+QUESTION 2:
+Based on the observed data, what is the dominant order of correlation between turbidity, algae (chlorophyll), and water shrinkage? Which variable acts as the primary driver, which responds second, and which emerges as the final outcome? Using this relationship, what future conditions can be predicted if present trends continue?
+"""
+
+    # ✅ FINAL LLM PROMPT — ML METRICS COMPLETELY BLOCKED
     full_prompt = f"""
-You are an expert in remote sensing, lake ecology, and water quality ML analysis.
+You are an expert in remote sensing, lake ecology, sediment dynamics, and water-body shrinkage analysis.
 
-Using the dataset + ML model summary below, provide:
+ABSOLUTE RULES:
+- DO NOT mention R², RMSE, MAE, Accuracy, Kappa, or any ML performance metric.
+- DO NOT evaluate model performance.
+- ONLY analyze physical-environmental trends, causal linkages, and predictions.
 
-1. A high-quality structured analytical report  
-2. Detailed bullet points  
-3. Trend analysis across all parameters  
-4. Future predictions (short-term & long-term)  
-5. Risk analysis (e.g., algal bloom probability, turbidity surges)  
-6. Anomaly detection  
-7. Actionable insights  
-8. A clear final conclusion  
+You must strictly answer ONLY the two scientific questions below using:
+- Trend reasoning
+- Physical cause–effect chains
+- Turbidity → Algae → Shrinkage linkage
+- Correlation order
+- Long-term future environmental prediction
 
 ===========================
-DATA + MODEL CONTEXT
+DATA CONTEXT (DO NOT DISCUSS ML METRICS)
 ===========================
 {context}
 
 ===========================
-USER QUESTION / FOCUS AREA
+FORCED SCIENTIFIC QUESTIONS
 ===========================
-{user_prompt}
+{forced_questions}
 
-Now generate the final full analysis.
+Generate a BIG, DEEP, RESEARCH-GRADE EXPLANATION.
 """
 
     model = genai.GenerativeModel(GEMINI_MODEL_NAME)

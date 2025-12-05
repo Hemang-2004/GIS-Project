@@ -64,9 +64,9 @@ export default function DashboardLayout({ children, selectedDataset, onDatasetCh
                 onChange={(e) => onDatasetChange(e.target.value)}
                 className="appearance-none glass-effect px-4 py-2.5 pr-10 rounded-xl border-none focus:outline-none focus:ring-2 focus:ring-cyan-500 font-medium text-gray-700 cursor-pointer"
               >
-                <option value="1">Dataset 1</option>
-                <option value="2">Dataset 2</option>
-                <option value="3">Dataset 3</option>
+                <option value="1">Port 1</option>
+                <option value="2">Port 2</option>
+                <option value="3">Port 3</option>
               </select>
               <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none" />
             </div>

@@ -2,7 +2,7 @@ import { type NextRequest, NextResponse } from "next/server"
 
 const mockModelAccuracyData = {
   description:
-    "Random Forest achieves the highest accuracy (92–93%), making it the best-performing model for NDCI prediction.",
+    "Random Forest achieves the highest accuracy (90-91%), making it the best-performing model for NDCI prediction.",
   analysis:
     "Comparison of ML model accuracies: Random Forest, Gradient Boosting, AdaBoost, Linear Regression, SVR, KNN.",
   imageUrl: "/model-accuracy-comparison-chart.jpg",

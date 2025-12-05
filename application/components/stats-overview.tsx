@@ -13,9 +13,9 @@ interface Metrics {
 export default function StatsOverview() {
   const [metrics] = useState<Metrics>({
     datasets_analyzed: 1250,
-    satellites_used: 8,
+    satellites_used: 4,
     data_points: 45000,
-    accuracy: 93,
+    accuracy: 90,
   })
 
   const [animated, setAnimated] = useState(false)

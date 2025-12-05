@@ -48,15 +48,15 @@ export default function DashboardPage() {
 
   const graphs = [
     { id: "correlation", title: "Correlation Matrix", endpoint: "/api/plot/correlation" },
-    { id: "ndci", title: "NDCI Trend Analysis", endpoint: "/api/plot/ndci" },
+    { id: "ndci", title: "Chl-a Trend Analysis", endpoint: "/api/plot/ndci" },
     { id: "turbidity", title: "Turbidity Trend", endpoint: "/api/plot/turbidity" },
     { id: "shrinkage", title: "Water Shrinkage Analysis", endpoint: "/api/plot/shrinkage" },
-    { id: "violin-ndci", title: "NDCI Distribution", endpoint: "/api/plot/violin/ndci" },
+    { id: "violin-ndci", title: "Chl-a Distribution", endpoint: "/api/plot/violin/ndci" },
     { id: "violin-turbidity", title: "Turbidity Distribution", endpoint: "/api/plot/violin/turbidity" },
     { id: "violin-shrinkage", title: "Shrinkage Distribution", endpoint: "/api/plot/violin/shrinkage" },
-    { id: "box-ndci", title: "NDCI Outliers", endpoint: "/api/plot/box/ndci" },
+    { id: "box-ndci", title: "Chl-a Outliers", endpoint: "/api/plot/box/ndci" },
     { id: "box-turbidity", title: "Turbidity Outliers", endpoint: "/api/plot/box/turbidity" },
-    { id: "model-accuracy", title: "Model Accuracy Comparison", endpoint: "/api/plot/model_accuracy" },
+    // { id: "model-accuracy", title: "Model Accuracy Comparison", endpoint: "/api/plot/model_accuracy" },
   ]
 
   const handleContextSubmit = () => {
@@ -84,7 +84,7 @@ export default function DashboardPage() {
         {uploadedFile && (
           <div className="mb-6 p-4 bg-emerald-50 border border-emerald-200 rounded-lg">
             <p className="text-sm text-emerald-800">
-              ✓ File <span className="font-semibold">{uploadedFile}</span> placed in analysis
+              ✓ Port <span className="font-semibold">{uploadedFile}</span> placed in analysis
             </p>
           </div>
         )}
@@ -93,7 +93,7 @@ export default function DashboardPage() {
         <div className="flex gap-4 flex-wrap">
           <button
             onClick={() =>
-              window.open("https://code.earthengine.google.com/b17b344df93fd62578700aad921e108f", "_blank")
+              window.open("https://code.earthengine.google.com/946b62e3f7d774a9b1cbbfbd949e61f8?hideCode=true", "_blank")
             }
             className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all shadow-md"
             style={{ fontFamily: '"Google Sans Flex", sans-serif', fontWeight: 500 }}

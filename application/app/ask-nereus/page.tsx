@@ -20,7 +20,7 @@ export default function AskNereusPage() {
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   const presetPrompts = [
-    "What trends do you see in the NDCI data?",
+    "What trends do you see in the Chlorophyll-a data?",
     "Analyze the turbidity patterns",
     "Explain the water shrinkage trends",
     "What is the model accuracy telling us?",

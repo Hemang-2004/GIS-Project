@@ -15,9 +15,9 @@ export default function LandingPage() {
   const features = [
     {
       icon: <Droplets className="w-8 h-8" />,
-      title: "NDCI Analysis",
-      description: "Advanced chlorophyll detection for eutrophication monitoring with 93% accuracy",
-      stat: "93%",
+      title: "Chla Analysis",
+      description: "Advanced chlorophyll detection for eutrophication monitoring with 90% accuracy",
+      stat: "90%",
       statLabel: "Accuracy",
     },
     {
@@ -71,7 +71,7 @@ export default function LandingPage() {
             style={{ animationDelay: "0.1s" }}
           >
             <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
-            <span className="text-sm font-medium text-gray-700">Trusted by IIIT Bangalore Research Team</span>
+            <span className="text-sm font-medium text-gray-700">Made by IIIT-B students</span>
           </div>
 
           <h1 className="text-6xl md:text-7xl font-bold mb-6 fade-in-up" style={{ animationDelay: "0.2s" }}>
@@ -128,7 +128,7 @@ export default function LandingPage() {
               </div>
               <div className="text-center">
                 <p className="text-3xl font-bold bg-gradient-to-r from-cyan-600 to-teal-600 bg-clip-text text-transparent">
-                  92-93%
+                  90-91%
                 </p>
                 <p className="text-sm text-gray-600">Model Accuracy</p>
               </div>

@@ -5,11 +5,11 @@ import { Leaf, Droplets, TrendingDown, Brain } from "lucide-react"
 export default function Timeline() {
   const events = [
     {
-      title: "NDCI Analysis",
+      title: "Chla Analysis",
       icon: <Leaf className="w-6 h-6" />,
       description:
         "Chlorophyll-a and algal bloom proxy detection for eutrophication monitoring. Shows gradual upward drift indicating progressive chlorophyll intensification.",
-      stats: { label: "Correlation", value: "0.53 with Year" },
+      stats: { label: "Correlation", value: "Integral with Year" },
       position: "left",
       color: "from-emerald-500 to-green-500",
     },
@@ -36,7 +36,7 @@ export default function Timeline() {
       icon: <Brain className="w-6 h-6" />,
       description:
         "Gemini 2.5 generative AI interprets dataset patterns and provides advanced ecological insights with predictive modeling.",
-      stats: { label: "Accuracy", value: "92-93%" },
+      stats: { label: "Model", value: "Google Gemini 2.5 Pro" },
       position: "right",
       color: "from-cyan-500 to-teal-500",
     },
